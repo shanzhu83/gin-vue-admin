@@ -1,4 +1,5 @@
 package upload
+
 import (
 	"errors"
 	"gin-vue-admin/global"
@@ -74,10 +75,22 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 
 func (*Local) DeleteFile(key string) error {
 	p := global.GVA_CONFIG.Local.Path + "/" + key
-	if strings.Contains(p, global.GVA_CONFIG.Local.Path) {
+	if stat, err := os.Stat(p); stat != nil && !os.IsNotExist(err) {
 		if err := os.Remove(p); err != nil {
 			return errors.New("本地文件删除失败, err:" + err.Error())
 		}
+		return nil
 	}
-	return nil
+	return errors.New("没有找到" + key + "文件。")
 }
+
+// 原内容
+//func (*Local) DeleteFile(key string) error {
+//	p := global.GVA_CONFIG.Local.Path + "/" + key
+//	if strings.Contains(p, global.GVA_CONFIG.Local.Path) {
+//		if err := os.Remove(p); err != nil {
+//			return errors.New("本地文件删除失败, err:" + err.Error())
+//		}
+//	}
+//	return nil
+//}

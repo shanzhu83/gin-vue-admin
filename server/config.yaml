@@ -21,8 +21,8 @@ zap:
 # redis configuration
 redis:
   db: 0
-  addr: '127.0.0.1:6379'
-  password: ''
+  addr: '192.168.73.129:6379'
+  password: '123456'
 
 # email configuration
 email:
@@ -41,10 +41,10 @@ casbin:
 # system configuration
 system:
   env: 'public'  # Change to "develop" to skip authentication for development mode
-  addr: 8888
+  addr: 8866
   db-type: 'mysql'
   oss-type: 'local'
-  use-multipoint: false
+  use-multipoint: true
 
 # captcha configuration
 captcha:
@@ -54,11 +54,11 @@ captcha:
 
 # mysql connect configuration
 mysql:
-  path: '127.0.0.1:3306'
+  path: '192.168.73.129:10112'
   config: 'charset=utf8mb4&parseTime=True&loc=Local'
-  db-name: 'qmPlus'
+  db-name: 'ginVue'
   username: 'root'
-  password: 'Aa@6447985'
+  password: '123456'
   max-idle-conns: 10
   max-open-conns: 100
   log-mode: false

@@ -40,7 +40,7 @@ var initdbCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		path, _ := cmd.Flags().GetString("path")
 		global.GVA_VP = core.Viper(path)
-		global.GVA_LOG = core.Zap()           // 初始化zap日志库
+		global.GVA_LOG = core.Zap() // 初始化zap日志库
 		db := initialize.GormMysql()
 		switch global.GVA_CONFIG.System.DbType {
 		case "mysql":
@@ -68,7 +68,7 @@ var initdbCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(initdbCmd)
-	initdbCmd.Flags().StringP("path", "p", "./config.yaml", "自定配置文件路径(绝对路径)")
+	initdbCmd.Flags().StringP("path", "p", "../config.yaml", "自定配置文件路径(绝对路径)")
 	initdbCmd.Flags().StringP("frame", "f", "gin", "可选参数为gin,gf")
 	initdbCmd.Flags().StringP("type", "t", "mysql", "可选参数为mysql,postgresql,sqlite,sqlserver")
 }

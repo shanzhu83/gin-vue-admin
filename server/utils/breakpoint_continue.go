@@ -86,8 +86,15 @@ func MakeFile(fileName string, FileMd5 string) (error, string) {
 	defer fd.Close()
 	for k := range rd {
 		content, _ := ioutil.ReadFile(breakpointDir + FileMd5 + "/" + fileName + "_" + strconv.Itoa(k))
-		_, err = fd.Write(content)
-		if err != nil {
+
+		//_, err = fd.Write(content)
+		//if err != nil {
+		//	_ = os.Remove(finishDir + fileName)
+		//	return err, finishDir + fileName
+		//}
+
+		n, err := fd.Write(content)
+		if err != nil || n <= 0 { //增加读取空文件判断
 			_ = os.Remove(finishDir + fileName)
 			return err, finishDir + fileName
 		}

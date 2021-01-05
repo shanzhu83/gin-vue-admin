@@ -23,6 +23,18 @@ func PathExists(path string) (bool, error) {
 	return false, err
 }
 
+func PathExists02(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
+
+}
+
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateDir
 //@description: 批量创建文件夹
@@ -39,7 +51,7 @@ func CreateDir(dirs ...string) (err error) {
 			global.GVA_LOG.Debug("create directory" + v)
 			err = os.MkdirAll(v, os.ModePerm)
 			if err != nil {
-				global.GVA_LOG.Error("create directory"+ v, zap.Any(" error:", err))
+				global.GVA_LOG.Error("create directory"+v, zap.Any(" error:", err))
 			}
 		}
 	}
